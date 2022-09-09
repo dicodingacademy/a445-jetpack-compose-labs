@@ -1,7 +1,9 @@
 package com.dicoding.jetheroes
 
 import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -38,6 +40,7 @@ fun JetHeroesApp(
     viewModel: JetHeroesViewModel = viewModel(factory = ViewModelFactory(HeroRepository()))
 ) {
     val groupedHeroes by viewModel.groupedHeroes.collectAsState()
+    val query by viewModel.query
 
     Box(modifier = modifier) {
         val scope = rememberCoroutineScope()
@@ -49,6 +52,13 @@ fun JetHeroesApp(
             state = listState,
             contentPadding = PaddingValues(bottom = 80.dp)
         ) {
+            item {
+                SearchBar(
+                    query = query,
+                    onQueryChange = viewModel::search,
+                    modifier = Modifier.background(MaterialTheme.colors.primary)
+                )
+            }
             groupedHeroes.forEach { (initial, heroes) ->
                 stickyHeader {
                     CharacterHeader(initial)
@@ -57,7 +67,9 @@ fun JetHeroesApp(
                     HeroListItem(
                         name = hero.name,
                         photoUrl = hero.photoUrl,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .animateItemPlacement(tween(durationMillis = 100))
                     )
                 }
             }
@@ -74,44 +86,12 @@ fun JetHeroesApp(
             ScrollToTopButton(
                 onClick = {
                     scope.launch {
-                        listState.scrollToItem(index = 0)
+                        listState.animateScrollToItem(index = 0)
                     }
                 }
             )
         }
     }
-}
-
-@Composable
-fun SearchBar(
-    query: String,
-    onQueryChange: (String) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    TextField(
-        value = query,
-        onValueChange = onQueryChange,
-        leadingIcon = {
-            Icon(
-                imageVector = Icons.Default.Search,
-                contentDescription = null
-            )
-        },
-        colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = MaterialTheme.colors.surface,
-            disabledIndicatorColor = Color.Transparent,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-        ),
-        placeholder = {
-            Text(stringResource(R.string.search_hero))
-        },
-        modifier = modifier
-            .padding(16.dp)
-            .fillMaxWidth()
-            .heightIn(min = 48.dp)
-            .clip(RoundedCornerShape(16.dp))
-    )
 }
 
 @Composable
@@ -145,6 +125,28 @@ fun HeroListItem(
 }
 
 @Composable
+fun ScrollToTopButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Button(
+        onClick = onClick,
+        modifier = modifier.shadow(10.dp, shape = CircleShape)
+            .clip(shape = CircleShape)
+            .size(56.dp),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = Color.White,
+            contentColor = MaterialTheme.colors.primary
+        )
+    ) {
+        Icon(
+            imageVector = Icons.Filled.KeyboardArrowUp,
+            contentDescription = stringResource(R.string.scroll_to_top),
+        )
+    }
+}
+
+@Composable
 fun CharacterHeader(
     char: Char,
     modifier: Modifier = Modifier
@@ -166,25 +168,35 @@ fun CharacterHeader(
 }
 
 @Composable
-fun ScrollToTopButton(
-    onClick: () -> Unit,
+fun SearchBar(
+    query: String,
+    onQueryChange: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Button(
-        onClick = onClick,
-        modifier = modifier.shadow(10.dp, shape = CircleShape)
-            .clip(shape = CircleShape)
-            .size(56.dp),
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = Color.White,
-            contentColor = MaterialTheme.colors.primary
-        )
-    ) {
-        Icon(
-            imageVector = Icons.Filled.KeyboardArrowUp,
-            contentDescription = stringResource(R.string.scroll_to_top),
-        )
-    }
+    TextField(
+        value = query,
+        onValueChange = onQueryChange,
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Default.Search,
+                contentDescription = null
+            )
+        },
+        colors = TextFieldDefaults.textFieldColors(
+            backgroundColor = MaterialTheme.colors.surface,
+            disabledIndicatorColor = Color.Transparent,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+        ),
+        placeholder = {
+            Text(stringResource(R.string.search_hero))
+        },
+        modifier = modifier
+            .padding(16.dp)
+            .fillMaxWidth()
+            .heightIn(min = 48.dp)
+            .clip(RoundedCornerShape(16.dp))
+    )
 }
 
 @Preview(showBackground = true)
