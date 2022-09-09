@@ -1,8 +1,6 @@
 package com.dicoding.jetheroes
 
 import androidx.compose.animation.*
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,28 +12,26 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import coil.compose.AsyncImagePainter.State.Empty.painter
-import coil.compose.SubcomposeAsyncImage
-import coil.compose.rememberAsyncImagePainter
-import coil.request.ImageRequest
-import com.dicoding.jetheroes.ui.theme.JetHeroesTheme
-import com.dicoding.jetheroes.data.HeroRepository
 import com.dicoding.jetheroes.model.HeroesData
+import com.dicoding.jetheroes.ui.theme.JetHeroesTheme
 import kotlinx.coroutines.launch
 
 @Composable
@@ -43,13 +39,15 @@ fun JetHeroesApp(
     modifier: Modifier = Modifier,
 ) {
     Box(modifier = modifier) {
-//        val listState = rememberLazyListState()
-//        val showButton: Boolean by remember { derivedStateOf { listState.firstVisibleItemIndex > 0 } }
-//        val scope = rememberCoroutineScope()
+        val scope = rememberCoroutineScope()
+        val listState = rememberLazyListState()
+        val showButton: Boolean by remember {
+            derivedStateOf { listState.firstVisibleItemIndex > 0 }
+        }
 
         LazyColumn(
-//            state = listState,
-//            contentPadding = PaddingValues(bottom = 80.dp)
+            state = listState,
+            contentPadding = PaddingValues(bottom = 80.dp)
         ) {
             items(HeroesData.heroes, key = { it.id }) { hero ->
                 HeroListItem(
@@ -59,21 +57,22 @@ fun JetHeroesApp(
                 )
             }
         }
-//        AnimatedVisibility(
-//            visible = showButton,
-//            enter = fadeIn() + slideInVertically(),
-//            exit = fadeOut() + slideOutVertically(),
-//            modifier = Modifier
-//                .padding(bottom = 30.dp)
-//                .align(Alignment.BottomCenter)
-//        ) {
-//            ScrollToTopButton(
-//                onClick = {
-//                    scope.launch {
-//                        listState.scrollToItem(0)
-//                    }
-//                })
-//        }
+        AnimatedVisibility(
+            visible = showButton,
+            enter = fadeIn() + slideInVertically(),
+            exit = fadeOut() + slideOutVertically(),
+            modifier = Modifier
+                .padding(bottom = 30.dp)
+                .align(Alignment.BottomCenter)
+        ) {
+            ScrollToTopButton(
+                onClick = {
+                    scope.launch {
+                        listState.scrollToItem(index = 0)
+                    }
+                }
+            )
+        }
     }
 }
 
@@ -145,7 +144,7 @@ fun CharacterHeader(
     modifier: Modifier = Modifier
 ) {
     Surface(
-        color = colorResource(id = R.color.purple_500),
+        color = MaterialTheme.colors.primary,
         modifier = modifier
     ) {
         Text(
@@ -172,15 +171,14 @@ fun ScrollToTopButton(
             .size(56.dp),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = Color.White,
-            contentColor = colorResource(id = R.color.purple_500)
+            contentColor = MaterialTheme.colors.primary
         )
     ) {
         Icon(
             imageVector = Icons.Filled.KeyboardArrowUp,
-            contentDescription = null,
+            contentDescription = stringResource(R.string.scroll_to_top),
         )
     }
-
 }
 
 @Preview(showBackground = true)
@@ -195,7 +193,6 @@ fun JetHeroesAppPreview() {
 @Composable
 fun HeroListItemPreview() {
     JetHeroesTheme {
-        val hero = HeroesData.heroes[0]
         HeroListItem(
             name = "H.O.S. Cokroaminoto",
             photoUrl = ""
