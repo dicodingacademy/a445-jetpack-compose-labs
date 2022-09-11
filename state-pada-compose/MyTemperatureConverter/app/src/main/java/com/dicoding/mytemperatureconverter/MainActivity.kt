@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.dicoding.mytemperatureconverter.ui.theme.MyTemperatureConverterTheme
@@ -47,17 +48,20 @@ fun StatefulTemperatureInput() {
     var input by rememberSaveable { mutableStateOf("") }
     var output by rememberSaveable { mutableStateOf("") }
     Column(modifier = Modifier.padding(16.dp)) {
-        Text("Stateful Converter", style = MaterialTheme.typography.h5)
+        Text(
+            text = stringResource(R.string.stateful_converter),
+            style = MaterialTheme.typography.h5
+        )
         OutlinedTextField(
             value = input,
-            label = { Text("Enter temperature in Celsius") },
+            label = { Text(stringResource(R.string.enter_celsius)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             onValueChange = { newInput ->
                 input = newInput
                 output = convertToFahrenheit(newInput)
             },
         )
-        Text("Temperature in Fahrenheit : $output")
+        Text(stringResource(R.string.temperature_fahrenheit, output))
     }
 }
 
@@ -67,16 +71,23 @@ private fun convertToFahrenheit(celsius: String) =
     }.toString()
 
 @Composable
-fun StatelessTemperatureInput(input: String, output: String, onValueChange: (String) -> Unit) {
+fun StatelessTemperatureInput(
+    input: String,
+    output: String,
+    onValueChange: (String) -> Unit
+) {
     Column(modifier = Modifier.padding(16.dp)) {
-        Text("Stateless Converter", style = MaterialTheme.typography.h5)
+        Text(
+            text = stringResource(R.string.stateless_converter),
+            style = MaterialTheme.typography.h5
+        )
         OutlinedTextField(
             value = input,
-            label = { Text("Enter temperature in Celsius") },
+            label = { Text(stringResource(R.string.enter_celsius)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             onValueChange = onValueChange,
         )
-        Text("Temperature in Fahrenheit : $output")
+        Text(stringResource(R.string.temperature_fahrenheit, output))
     }
 }
 
@@ -110,7 +121,7 @@ fun GeneralTemperatureInput(
     Column {
         OutlinedTextField(
             value = input,
-            label = { Text("Enter temperature in ${scale.scaleName}") },
+            label = { Text(stringResource(R.string.enter_temperature, scale.scaleName)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             onValueChange = onValueChange,
         )
@@ -122,7 +133,10 @@ private fun TwoWayConverterApp() {
     var celsius by rememberSaveable { mutableStateOf("") }
     var fahrenheit by rememberSaveable { mutableStateOf("") }
     Column(modifier = Modifier.padding(16.dp)) {
-        Text("Two Way Converter", style = MaterialTheme.typography.h5)
+        Text(
+            text = stringResource(R.string.two_way_converter),
+            style = MaterialTheme.typography.h5
+        )
         GeneralTemperatureInput(
             scale = Scale.CELSIUS,
             input = celsius,
