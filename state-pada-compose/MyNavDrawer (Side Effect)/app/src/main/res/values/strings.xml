@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">My Nav Drawer</string>
+    <string name="hello_world">Hello World</string>
+    <string name="menu">Menu</string>
+    <string name="hello_from_nav_drawer">Hello From Navigation Drawer</string>
+    <string name="home">Home</string>
+    <string name="favourite">Favourite</string>
+    <string name="profile">Profile</string>
+    <string name="coming_soon">%s Menu is Coming Soon!</string>
+    <string name="subscribe_question">Subscribe?</string>
+    <string name="subscribed_info">Subscribed. You will informed when the feature is ready</string>
+</resources>
