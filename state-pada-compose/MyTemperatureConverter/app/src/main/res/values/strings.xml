@@ -4,6 +4,6 @@
     <string name="stateless_converter">Stateless Converter</string>
     <string name="two_way_converter">Two Way Converter</string>
     <string name="enter_celsius">Enter temperature in Celsius</string>
-    <string name="temperature_fahrenheit">Temperature in Fahrenheit : $s</string>
-    <string name="enter_temperature">Enter temperature in $s</string>
+    <string name="temperature_fahrenheit">Temperature in Fahrenheit : %s</string>
+    <string name="enter_temperature">Enter temperature in %s</string>
 </resources>
