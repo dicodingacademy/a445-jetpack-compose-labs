@@ -44,19 +44,35 @@ fun MyApp() {
     ) {
         composable(route = "first") {
             FirstScreen { content ->
-                navController.navigate("second/$content")
+                navController.navigate("second/$content/10?nullableContent=Welcome")
             }
         }
         composable(
-            route = "second/{content}",
+//            route = "second/{content}",
+            route = "second/{content}/{otherContent}?nullableContent={nullableContent}&otherNullableContent={otherNullableContent}",
             arguments = listOf(
                 navArgument("content") {
                     type = NavType.StringType
+                },
+                navArgument("otherContent") {
+                    type = NavType.IntType
+                },
+                navArgument("nullableContent") {
+                    type = NavType.StringType
+                    nullable = true
+                },
+                navArgument("otherNullableContent") {
+                    type = NavType.StringType
+                    nullable = true
+                    defaultValue = "!"
                 }
             )
         ) { backStackEntry ->
             SecondScreen(
-                content = backStackEntry.arguments?.getString("content"),
+                content = backStackEntry.arguments?.getString("content")
+                        + backStackEntry.arguments?.getInt("otherContent")
+                        + backStackEntry.arguments?.getString("nullableContent")
+                        + backStackEntry.arguments?.getString("otherNullableContent"),
                 navigateBack = { navController.navigateUp() },
             )
         }
