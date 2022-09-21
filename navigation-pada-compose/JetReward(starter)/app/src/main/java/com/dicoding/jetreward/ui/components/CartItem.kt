@@ -62,18 +62,13 @@ fun CartItem(
                 style = MaterialTheme.typography.subtitle2,
             )
         }
-        Box(
-            modifier = Modifier
-                .fillMaxHeight()
-                .padding(8.dp)
-        ) {
-            ProductCounter(
-                orderId = rewardId,
-                orderCount = count,
-                onProductIncreased = { onProductCountChanged(rewardId, count + 1) },
-                onProductDecreased = { onProductCountChanged(rewardId, count - 1) }
-            )
-        }
+        ProductCounter(
+            orderId = rewardId,
+            orderCount = count,
+            onProductIncreased = { onProductCountChanged(rewardId, count + 1) },
+            onProductDecreased = { onProductCountChanged(rewardId, count - 1) },
+            modifier = Modifier.padding(8.dp)
+        )
     }
 }
 
