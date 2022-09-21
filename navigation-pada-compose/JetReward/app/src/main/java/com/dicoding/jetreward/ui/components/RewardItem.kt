@@ -2,7 +2,6 @@ package com.dicoding.jetreward.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -11,11 +10,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dicoding.jetreward.R
+import com.dicoding.jetreward.ui.theme.JetRewardTheme
 import com.dicoding.jetreward.ui.theme.Shapes
 
 @Composable
@@ -33,7 +34,7 @@ fun RewardItem(
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .size(180.dp)
+                .size(170.dp)
                 .clip(Shapes.medium)
         )
         Text(
@@ -45,8 +46,9 @@ fun RewardItem(
             )
         )
         Text(
-            text = "$requiredPoint pts",
-            style = MaterialTheme.typography.subtitle2
+            text = stringResource(R.string.required_point, requiredPoint),
+            style = MaterialTheme.typography.subtitle2,
+            color = MaterialTheme.colors.secondary
         )
     }
 }
@@ -54,7 +56,7 @@ fun RewardItem(
 @Composable
 @Preview(showBackground = true)
 fun RewardItemPreview() {
-    MaterialTheme {
+    JetRewardTheme {
         RewardItem(R.drawable.reward_4, "Jaket Hoodie Dicoding", 4000)
     }
 }

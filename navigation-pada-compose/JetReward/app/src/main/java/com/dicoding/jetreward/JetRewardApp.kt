@@ -13,13 +13,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.dicoding.jetreward.ui.navigation.NavigationItem
 import com.dicoding.jetreward.ui.navigation.Screen
 import com.dicoding.jetreward.ui.screen.cart.CartScreen
+import com.dicoding.jetreward.ui.screen.detail.DetailScreen
 import com.dicoding.jetreward.ui.screen.home.HomeScreen
 import com.dicoding.jetreward.ui.screen.profile.ProfileScreen
 import com.dicoding.jetreward.ui.theme.JetRewardTheme
@@ -41,13 +44,35 @@ fun JetRewardApp(
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) {
-                HomeScreen(navigateToDetail = {})
+                HomeScreen(navigateToDetail = {
+                    navController.navigate(Screen.DetailReward.createRoute(it))
+                })
             }
             composable(Screen.Cart.route) {
                 CartScreen()
             }
             composable(Screen.Profile.route) {
                 ProfileScreen()
+            }
+            composable(
+                route = Screen.DetailReward.route,
+                arguments = listOf(navArgument("rewardId") { type = NavType.LongType }),
+            ) {
+                val id = it.arguments?.getLong("rewardId") ?: -1L
+                DetailScreen(id,
+                    navigateBack = {
+                        navController.navigateUp()
+                    },
+                    navigateToCart = {
+                        navController.popBackStack()
+                        navController.navigate(Screen.Cart.route){
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    })
             }
         }
     }

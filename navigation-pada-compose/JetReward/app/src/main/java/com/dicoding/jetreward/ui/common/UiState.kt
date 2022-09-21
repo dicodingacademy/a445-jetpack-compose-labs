@@ -1,7 +1,5 @@
 package com.dicoding.jetreward.ui.common
 
-import java.lang.Exception
-
 sealed class UiState<out T: Any?> {
 
     object Loading : UiState<Nothing>()

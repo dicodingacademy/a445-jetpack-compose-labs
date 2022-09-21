@@ -20,10 +20,10 @@ import com.dicoding.jetreward.ui.common.UiState
 @Composable
 fun HomeScreen(
     navigateToDetail: (Long) -> Unit,
+    modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(
         factory = ViewModelFactory(Injection.provideRepository())
     ),
-    modifier: Modifier = Modifier
 ) {
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
@@ -49,7 +49,7 @@ fun HomeContent(
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(180.dp),
+        columns = GridCells.Adaptive(170.dp),
         contentPadding = PaddingValues(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
