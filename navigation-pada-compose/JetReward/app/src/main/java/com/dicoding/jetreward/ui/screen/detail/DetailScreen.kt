@@ -7,11 +7,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -22,6 +24,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dicoding.jetreward.R
 import com.dicoding.jetreward.di.Injection
@@ -81,48 +84,52 @@ fun DetailContent(
     var orderCount by rememberSaveable { mutableStateOf(count) }
 
     Column(modifier = modifier) {
-        Box {
-            Image(
-                painter = painterResource(image),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = modifier.height(400.dp)
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp))
-            )
-            Icon(
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Back",
-                modifier = Modifier.padding(16.dp).clickable { onBackClick() }
-            )
-        }
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.padding(16.dp).weight(1f)
+            modifier = Modifier
+                .verticalScroll(rememberScrollState())
+                .weight(1f)
         ) {
-            Text(
-                text = title,
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.h5.copy(
-                    fontWeight = FontWeight.ExtraBold
-                ),
-            )
-            Text(
-                text = stringResource(R.string.required_point, basePoint),
-                style = MaterialTheme.typography.subtitle1.copy(
-                    fontWeight = FontWeight.ExtraBold
-                ),
-                color = MaterialTheme.colors.secondary
-            )
-            Text(
-                text = stringResource(R.string.lorem_ipsum),
-                style = MaterialTheme.typography.body2,
-                textAlign = TextAlign.Justify,
-                overflow = TextOverflow.Ellipsis
-            )
+            Box {
+                Image(
+                    painter = painterResource(image),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = modifier.height(400.dp)
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp))
+                )
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = stringResource(R.string.back),
+                    modifier = Modifier.padding(16.dp).clickable { onBackClick() }
+                )
+            }
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text(
+                    text = title,
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.h5.copy(
+                        fontWeight = FontWeight.ExtraBold
+                    ),
+                )
+                Text(
+                    text = stringResource(R.string.required_point, basePoint),
+                    style = MaterialTheme.typography.subtitle1.copy(
+                        fontWeight = FontWeight.ExtraBold
+                    ),
+                    color = MaterialTheme.colors.secondary
+                )
+                Text(
+                    text = stringResource(R.string.lorem_ipsum),
+                    style = MaterialTheme.typography.body2,
+                    textAlign = TextAlign.Justify,
+                )
+            }
         }
-        Spacer(modifier = Modifier.fillMaxWidth().height(6.dp).background(LightGray))
-
+        Spacer(modifier = Modifier.fillMaxWidth().height(4.dp).background(LightGray))
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
@@ -131,9 +138,8 @@ fun DetailContent(
                 orderCount,
                 onProductIncreased = { orderCount++ },
                 onProductDecreased = { if (orderCount > 0) orderCount-- },
-                modifier = Modifier.align(Alignment.CenterHorizontally).padding(bottom = 8.dp)
+                modifier = Modifier.align(Alignment.CenterHorizontally).padding(bottom = 16.dp)
             )
-
             totalPoint = basePoint * orderCount
             OrderButton(
                 text = stringResource(R.string.add_to_cart, totalPoint),
@@ -156,6 +162,7 @@ fun DetailContentPreview() {
             7500,
             1,
             onBackClick = {},
-            onAddToCart = {})
+            onAddToCart = {}
+        )
     }
 }

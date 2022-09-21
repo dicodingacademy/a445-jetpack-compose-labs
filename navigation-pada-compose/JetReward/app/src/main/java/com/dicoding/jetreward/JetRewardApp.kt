@@ -32,9 +32,14 @@ fun JetRewardApp(
     modifier: Modifier = Modifier,
 ) {
     val navController = rememberNavController()
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
     Scaffold(
         bottomBar = {
-            BottomBar(navController)
+            if (currentRoute != Screen.DetailReward.route) {
+                BottomBar(navController)
+            }
         },
         modifier = modifier
     ) { innerPadding ->
@@ -65,7 +70,7 @@ fun JetRewardApp(
                     },
                     navigateToCart = {
                         navController.popBackStack()
-                        navController.navigate(Screen.Cart.route){
+                        navController.navigate(Screen.Cart.route) {
                             popUpTo(navController.graph.findStartDestination().id) {
                                 saveState = true
                             }

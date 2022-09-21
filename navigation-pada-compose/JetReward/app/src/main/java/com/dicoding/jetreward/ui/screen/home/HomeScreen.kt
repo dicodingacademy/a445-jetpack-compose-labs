@@ -12,10 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dicoding.jetreward.di.Injection
-import com.dicoding.jetreward.ui.ViewModelFactory
-import com.dicoding.jetreward.ui.components.RewardItem
 import com.dicoding.jetreward.model.OrderReward
+import com.dicoding.jetreward.ui.ViewModelFactory
 import com.dicoding.jetreward.ui.common.UiState
+import com.dicoding.jetreward.ui.components.RewardItem
 
 @Composable
 fun HomeScreen(
@@ -55,7 +55,7 @@ fun HomeContent(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier
     ) {
-        items(orderReward) { data ->
+        items(orderReward, key = { it.reward.id }) { data ->
             RewardItem(
                 image = data.reward.image,
                 title = data.reward.title,
