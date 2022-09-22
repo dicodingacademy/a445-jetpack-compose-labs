@@ -19,11 +19,11 @@ import com.dicoding.jetreward.ui.components.RewardItem
 
 @Composable
 fun HomeScreen(
-    navigateToDetail: (Long) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(
         factory = ViewModelFactory(Injection.provideRepository())
     ),
+    navigateToDetail: (Long) -> Unit,
 ) {
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
@@ -33,8 +33,8 @@ fun HomeScreen(
             is UiState.Success -> {
                 HomeContent(
                     orderReward = uiState.data,
+                    modifier = modifier,
                     navigateToDetail = navigateToDetail,
-                    modifier = modifier
                 )
             }
             is UiState.Error -> {}
@@ -45,17 +45,17 @@ fun HomeScreen(
 @Composable
 fun HomeContent(
     orderReward: List<OrderReward>,
-    navigateToDetail: (Long) -> Unit,
     modifier: Modifier = Modifier,
+    navigateToDetail: (Long) -> Unit,
 ) {
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(170.dp),
+        columns = GridCells.Adaptive(160.dp),
         contentPadding = PaddingValues(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier
     ) {
-        items(orderReward, key = { it.reward.id }) { data ->
+        items(orderReward) { data ->
             RewardItem(
                 image = data.reward.image,
                 title = data.reward.title,
