@@ -44,10 +44,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun StatefulTemperatureInput() {
+fun StatefulTemperatureInput(
+    modifier: Modifier = Modifier,
+) {
     var input by rememberSaveable { mutableStateOf("") }
     var output by rememberSaveable { mutableStateOf("") }
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(modifier = modifier.padding(16.dp)) {
         Text(
             text = stringResource(R.string.stateful_converter),
             style = MaterialTheme.typography.h5
@@ -74,9 +76,10 @@ private fun convertToFahrenheit(celsius: String) =
 fun StatelessTemperatureInput(
     input: String,
     output: String,
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(modifier = modifier.padding(16.dp)) {
         Text(
             text = stringResource(R.string.stateless_converter),
             style = MaterialTheme.typography.h5
@@ -92,10 +95,12 @@ fun StatelessTemperatureInput(
 }
 
 @Composable
-private fun ConverterApp() {
+private fun ConverterApp(
+    modifier: Modifier = Modifier,
+) {
     var input by rememberSaveable { mutableStateOf("") }
     var output by rememberSaveable { mutableStateOf("") }
-    Column {
+    Column(modifier = modifier) {
         StatelessTemperatureInput(
             input = input,
             output = output,
@@ -116,9 +121,10 @@ enum class Scale(val scaleName: String) {
 fun GeneralTemperatureInput(
     scale: Scale,
     input: String,
-    onValueChange: (String) -> Unit
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    Column {
+    Column(modifier = modifier) {
         OutlinedTextField(
             value = input,
             label = { Text(stringResource(R.string.enter_temperature, scale.scaleName)) },
@@ -129,10 +135,12 @@ fun GeneralTemperatureInput(
 }
 
 @Composable
-private fun TwoWayConverterApp() {
+private fun TwoWayConverterApp(
+    modifier: Modifier = Modifier,
+) {
     var celsius by rememberSaveable { mutableStateOf("") }
     var fahrenheit by rememberSaveable { mutableStateOf("") }
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(modifier = modifier.padding(16.dp)) {
         Text(
             text = stringResource(R.string.two_way_converter),
             style = MaterialTheme.typography.h5
