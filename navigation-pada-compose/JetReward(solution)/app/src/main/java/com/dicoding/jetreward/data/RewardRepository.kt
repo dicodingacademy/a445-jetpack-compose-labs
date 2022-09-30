@@ -12,7 +12,7 @@ class RewardRepository {
 
     init {
         if (orderRewards.isEmpty()) {
-            FakeRewardDataSource.dummyRewards.map {
+            FakeRewardDataSource.dummyRewards.forEach {
                 orderRewards.add(OrderReward(it, 0))
             }
         }
