@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">JetReward</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_cart">Keranjang</string>
+    <string name="menu_profile">Profile</string>
+    <string name="required_point">%d Pts</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </string>
+    <string name="minus_symbol">—</string>
+    <string name="plus_symbol">＋</string>
+    <string name="add_to_cart">Tambah ke Keranjang : %d Pts</string>
+    <string name="total_order">Total pesanan : %d Pts</string>
+    <string name="back">Back</string>
+    <string name="dicoding_reward">Dicoding Reward</string>
+    <string name="share_message">Hey, I have redeem %d$1 rewards in Dicoding with total %d$2 Points. Do you want too?</string>
+</resources>
