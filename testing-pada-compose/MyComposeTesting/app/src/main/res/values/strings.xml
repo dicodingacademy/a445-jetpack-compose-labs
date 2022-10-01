@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My Compose Testing</string>
+    <string name="enter_length">Masukkan panjang</string>
+    <string name="enter_width">Masukkan lebar</string>
+    <string name="count">Hitung!</string>
+    <string name="result">Hasil: %s</string>
+</resources>
