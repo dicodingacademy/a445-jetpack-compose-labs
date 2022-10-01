@@ -35,7 +35,7 @@ fun ProductCounter(
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier.size(width = 110.dp, height = 40.dp).padding(4.dp)
-        ) {
+    ) {
         Surface(
             shape = RoundedCornerShape(size = 5.dp),
             border = BorderStroke(1.dp, MaterialTheme.colors.primary),
