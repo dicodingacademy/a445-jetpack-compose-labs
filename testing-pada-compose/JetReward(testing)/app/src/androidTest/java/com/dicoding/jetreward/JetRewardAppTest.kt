@@ -71,25 +71,4 @@ class JetRewardAppTest {
         composeTestRule.onNodeWithStringId(R.string.menu_home).performClick()
         navController.assertCurrentRouteName(Screen.Home.route)
     }
-
-//    @Test
-//    fun navHost_cartDecreased_removed() {
-//        composeTestRule.onNodeWithText("Jaket Hoodie Dicoding").performClick()
-//        assertEquals(navController.currentBackStackEntry?.destination?.route, Screen.DetailReward.route)
-//        composeTestRule.onNodeWithText("＋").performClick()
-//        composeTestRule.onNodeWithText("Tambah ke Keranjang : 1000 Pts").performClick()
-//        assertEquals(navController.currentBackStackEntry?.destination?.route, Screen.Cart.route)
-//        composeTestRule.onNodeWithText("Jaket Hoodie Dicoding").assertIsDisplayed()
-//        composeTestRule.onNodeWithText("Home").performClick()
-//        composeTestRule.onNodeWithText("Token Sertifikasi TensorFlow").performClick()
-//        assertEquals(navController.currentBackStackEntry?.destination?.route, Screen.DetailReward.route)
-//        composeTestRule.onNodeWithText("＋").performClick()
-//        composeTestRule.onNodeWithText("Tambah ke Keranjang : 4500 Pts").performClick()
-//        assertEquals(navController.currentBackStackEntry?.destination?.route, Screen.Cart.route)
-//        composeTestRule.onAllNodesWithText("＋")[0].performClick()
-//        composeTestRule.onNodeWithText("Total pesanan : 10000 Pts").assertExists()
-//        composeTestRule.onAllNodesWithText("—")[1].performClick()
-//        composeTestRule.onNodeWithText("Jaket Hoodie Dicoding").assertIsNotDisplayed()
-//        composeTestRule.onNodeWithText("Total pesanan : 9000 Pts").assertExists()
-//    }
 }
