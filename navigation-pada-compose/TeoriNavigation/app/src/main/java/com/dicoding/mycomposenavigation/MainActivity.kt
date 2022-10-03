@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,13 +42,13 @@ fun MyApp() {
         startDestination = "first"
     ) {
         composable(route = "first") {
-            FirstScreen { content ->
-                navController.navigate("second/$content/10?nullableContent=Welcome")
+            FirstScreen { messageContent ->
+                navController.navigate("second/$messageContent/10?nullableContent=Welcome")
             }
         }
         composable(
 //            route = "second/{content}",
-            route = "second/{content}/{otherContent}?nullableContent={nullableContent}&otherNullableContent={otherNullableContent}",
+            route = "second/{content}/{otherContent}?optionalContent={optionalContent}&otherOptionalContent={otherOptionalContent}",
             arguments = listOf(
                 navArgument("content") {
                     type = NavType.StringType
@@ -57,11 +56,11 @@ fun MyApp() {
                 navArgument("otherContent") {
                     type = NavType.IntType
                 },
-                navArgument("nullableContent") {
+                navArgument("optionalContent") {
                     type = NavType.StringType
                     nullable = true
                 },
-                navArgument("otherNullableContent") {
+                navArgument("otherOptionalContent") {
                     type = NavType.StringType
                     nullable = true
                     defaultValue = "!"
@@ -71,8 +70,8 @@ fun MyApp() {
             SecondScreen(
                 content = backStackEntry.arguments?.getString("content")
                         + backStackEntry.arguments?.getInt("otherContent")
-                        + backStackEntry.arguments?.getString("nullableContent")
-                        + backStackEntry.arguments?.getString("otherNullableContent"),
+                        + backStackEntry.arguments?.getString("optionalContent")
+                        + backStackEntry.arguments?.getString("otherOptionalContent"),
                 navigateBack = { navController.navigateUp() },
             )
         }
