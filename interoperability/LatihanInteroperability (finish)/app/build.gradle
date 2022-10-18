@@ -31,6 +31,10 @@ android {
 
     buildFeatures {
         viewBinding true
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.2.0'
     }
     namespace 'com.dicoding.newsapp'
 }
@@ -65,4 +69,13 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1" //viewModelScope
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1" //liveData
     implementation "androidx.room:room-ktx:2.4.3"
+
+    //compose
+    implementation 'androidx.activity:activity-compose:1.6.0'
+    implementation "androidx.compose.ui:ui:$compose_ui_version"
+    implementation "androidx.compose.material:material:$compose_ui_version"
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+    implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
+    implementation "io.coil-kt:coil-compose:2.2.0"
 }
