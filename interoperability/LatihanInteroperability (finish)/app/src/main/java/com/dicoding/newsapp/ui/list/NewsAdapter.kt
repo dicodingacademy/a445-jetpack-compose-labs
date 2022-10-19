@@ -4,15 +4,11 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -26,9 +22,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.compose.AsyncImage
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.dicoding.newsapp.R
 import com.dicoding.newsapp.data.local.entity.NewsEntity
 import com.dicoding.newsapp.databinding.ItemNewsBinding
 import com.dicoding.newsapp.ui.list.NewsAdapter.MyViewHolder
@@ -94,12 +87,6 @@ class NewsAdapter(private val onItemClick: (NewsEntity) -> Unit) :
     }
 }
 
-
-@Composable
-fun Test(
-) {
-    Text("Test")
-}
 @Composable
 fun NewsItem(
     urlToImage: String?,

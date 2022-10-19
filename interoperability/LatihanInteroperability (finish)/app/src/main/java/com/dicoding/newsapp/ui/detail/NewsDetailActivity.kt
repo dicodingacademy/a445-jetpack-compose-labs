@@ -1,7 +1,6 @@
 package com.dicoding.newsapp.ui.detail
 
 import android.os.Bundle
-import android.view.Menu
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -22,7 +21,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
 import com.dicoding.newsapp.R
 import com.dicoding.newsapp.data.local.entity.NewsEntity
-import com.dicoding.newsapp.databinding.ActivityNewsDetailBinding
 import com.dicoding.newsapp.ui.ViewModelFactory
 
 class NewsDetailActivity : AppCompatActivity() {
@@ -129,6 +127,6 @@ fun NewsDetailContent(
 @Composable
 fun NewsItemPreview() {
     MaterialTheme {
-        NewsDetailContent("New News", "www.dicoding.com", true, {})
+        NewsDetailContent("New News", "www.dicoding.com", false, {})
     }
 }
