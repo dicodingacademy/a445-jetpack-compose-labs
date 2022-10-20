@@ -12,6 +12,7 @@
         android:theme="@style/Theme.News">
         <activity
             android:name=".ui.detail.NewsDetailActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".ui.list.HomeActivity"

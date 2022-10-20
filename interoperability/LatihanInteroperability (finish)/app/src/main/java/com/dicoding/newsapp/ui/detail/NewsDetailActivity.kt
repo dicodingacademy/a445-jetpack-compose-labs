@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -62,10 +63,11 @@ fun NewsDetailScreen(
     viewModel: NewsDetailViewModel,
 ) {
     viewModel.setNewsData(newsDetail)
+    val bookmarkStatus by viewModel.bookmarkStatus.observeAsState(false)
     NewsDetailContent(
         newsDetail.title,
         newsDetail.url.toString(),
-        viewModel.bookmarkStatus.observeAsState(false).value,
+        bookmarkStatus,
         updateBookmarkStatus = {
             viewModel.changeBookmark(newsDetail)
         }
@@ -107,25 +109,27 @@ fun NewsDetailContent(
         modifier = modifier
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
-            AndroidView(factory = {
-                WebView(it).apply {
-                    layoutParams = ViewGroup.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT
-                    )
-                    webViewClient = WebViewClient()
-                    loadUrl(url)
+            AndroidView(
+                factory = {
+                    WebView(it).apply {
+                        layoutParams = ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.MATCH_PARENT
+                        )
+                        webViewClient = WebViewClient()
+                    }
+                },
+                update = {
+                    it.loadUrl(url)
                 }
-            }, update = {
-                it.loadUrl(url)
-            })
+            )
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun NewsItemPreview() {
+fun NewsDetailContentPreview() {
     MaterialTheme {
         NewsDetailContent("New News", "www.dicoding.com", false, {})
     }
