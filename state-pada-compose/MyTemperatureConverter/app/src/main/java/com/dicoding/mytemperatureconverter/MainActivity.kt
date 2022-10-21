@@ -49,7 +49,7 @@ fun StatefulTemperatureInput(
 ) {
     var input by rememberSaveable { mutableStateOf("") }
     var output by rememberSaveable { mutableStateOf("") }
-    Column(modifier = modifier.padding(16.dp)) {
+    Column(modifier.padding(16.dp)) {
         Text(
             text = stringResource(R.string.stateful_converter),
             style = MaterialTheme.typography.h5
@@ -79,7 +79,7 @@ fun StatelessTemperatureInput(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier.padding(16.dp)) {
+    Column(modifier.padding(16.dp)) {
         Text(
             text = stringResource(R.string.stateless_converter),
             style = MaterialTheme.typography.h5
@@ -100,7 +100,7 @@ private fun ConverterApp(
 ) {
     var input by rememberSaveable { mutableStateOf("") }
     var output by rememberSaveable { mutableStateOf("") }
-    Column(modifier = modifier) {
+    Column(modifier) {
         StatelessTemperatureInput(
             input = input,
             output = output,
@@ -124,7 +124,7 @@ fun GeneralTemperatureInput(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier) {
+    Column(modifier) {
         OutlinedTextField(
             value = input,
             label = { Text(stringResource(R.string.enter_temperature, scale.scaleName)) },
@@ -140,7 +140,7 @@ private fun TwoWayConverterApp(
 ) {
     var celsius by rememberSaveable { mutableStateOf("") }
     var fahrenheit by rememberSaveable { mutableStateOf("") }
-    Column(modifier = modifier.padding(16.dp)) {
+    Column(modifier.padding(16.dp)) {
         Text(
             text = stringResource(R.string.two_way_converter),
             style = MaterialTheme.typography.h5
