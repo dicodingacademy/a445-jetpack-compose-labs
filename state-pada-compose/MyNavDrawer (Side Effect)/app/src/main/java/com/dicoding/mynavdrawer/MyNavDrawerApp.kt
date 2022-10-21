@@ -6,6 +6,7 @@ import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.layout.LazyLayout
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -125,7 +126,7 @@ fun MyDrawerContent(
     Column(modifier.fillMaxSize()) {
         Box(
             modifier = Modifier
-                .height(191.dp)
+                .height(190.dp)
                 .fillMaxWidth()
                 .background(MaterialTheme.colors.primary)
         )
@@ -142,7 +143,7 @@ fun MyDrawerContent(
                     contentDescription = item.title,
                     tint = Color.DarkGray
                 )
-                Spacer(modifier = Modifier.width(32.dp))
+                Spacer(Modifier.width(32.dp))
                 Text(text = item.title, style = MaterialTheme.typography.subtitle2)
             }
         }
