@@ -20,9 +20,9 @@ import com.dicoding.mycomposetesting.ui.theme.MyComposeTestingTheme
 fun CalculatorApp(
     modifier: Modifier = Modifier
 ) {
-    var lengthInput by rememberSaveable { mutableStateOf("") }
-    var widthInput by rememberSaveable { mutableStateOf("") }
-    var result by rememberSaveable { mutableStateOf("") }
+    var lengthInput by remember { mutableStateOf("") }
+    var widthInput by remember { mutableStateOf("") }
+    var result by remember { mutableStateOf("") }
 
     val length = lengthInput.toDoubleOrNull() ?: 0.0
     val width = widthInput.toDoubleOrNull() ?: 0.0
