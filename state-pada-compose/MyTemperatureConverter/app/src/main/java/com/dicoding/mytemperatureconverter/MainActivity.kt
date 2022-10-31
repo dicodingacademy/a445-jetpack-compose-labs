@@ -14,7 +14,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.saveable.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -47,8 +47,8 @@ class MainActivity : ComponentActivity() {
 fun StatefulTemperatureInput(
     modifier: Modifier = Modifier,
 ) {
-    var input by rememberSaveable { mutableStateOf("") }
-    var output by rememberSaveable { mutableStateOf("") }
+    var input by remember { mutableStateOf("") }
+    var output by remember { mutableStateOf("") }
     Column(modifier.padding(16.dp)) {
         Text(
             text = stringResource(R.string.stateful_converter),
@@ -98,8 +98,8 @@ fun StatelessTemperatureInput(
 private fun ConverterApp(
     modifier: Modifier = Modifier,
 ) {
-    var input by rememberSaveable { mutableStateOf("") }
-    var output by rememberSaveable { mutableStateOf("") }
+    var input by remember { mutableStateOf("") }
+    var output by remember { mutableStateOf("") }
     Column(modifier) {
         StatelessTemperatureInput(
             input = input,
@@ -138,8 +138,8 @@ fun GeneralTemperatureInput(
 private fun TwoWayConverterApp(
     modifier: Modifier = Modifier,
 ) {
-    var celsius by rememberSaveable { mutableStateOf("") }
-    var fahrenheit by rememberSaveable { mutableStateOf("") }
+    var celsius by remember { mutableStateOf("") }
+    var fahrenheit by remember { mutableStateOf("") }
     Column(modifier.padding(16.dp)) {
         Text(
             text = stringResource(R.string.two_way_converter),
