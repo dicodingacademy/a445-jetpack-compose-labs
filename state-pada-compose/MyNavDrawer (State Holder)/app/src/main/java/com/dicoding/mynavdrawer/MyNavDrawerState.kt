@@ -26,13 +26,13 @@ class MyNavDrawerState(
         scope.launch {
             scaffoldState.drawerState.close()
             val snackbarResult = scaffoldState.snackbarHostState.showSnackbar(
-                message = stringResource(R.string.coming_soon, title),
-                actionLabel = stringResource(R.string.subscribe_question)
+                message = context.resources.getString(R.string.coming_soon, title),
+                actionLabel = context.resources.getString(R.string.subscribe_question)
             )
             if (snackbarResult == SnackbarResult.ActionPerformed) {
                 Toast.makeText(
                     context,
-                    stringResource(R.string.subscribed_info),
+                    context.resources.getString(R.string.subscribed_info),
                     Toast.LENGTH_SHORT
                 ).show()
             }
