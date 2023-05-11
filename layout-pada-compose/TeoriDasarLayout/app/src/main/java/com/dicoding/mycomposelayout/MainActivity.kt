@@ -63,7 +63,9 @@ fun ContactCard() {
             Image(
                 painter = painterResource(R.drawable.avatar1),
                 contentDescription = "Avatar",
-                modifier = Modifier.size(60.dp).clip(CircleShape)
+                modifier = Modifier
+                    .size(60.dp)
+                    .clip(CircleShape)
             )
             Icon(
                 imageVector = Icons.Default.CheckCircle,
@@ -96,7 +98,7 @@ fun ButtonA() {
     Button(
         onClick = {},
         colors = ButtonDefaults.buttonColors(colorResource(R.color.purple_200)),
-        modifier = Modifier.size(80.dp)
+        modifier = Modifier.size(100.dp)
     ) {
         Text("A")
     }
@@ -107,7 +109,7 @@ fun ButtonB() {
     Button(
         onClick = {},
         colors = ButtonDefaults.buttonColors(colorResource(R.color.purple_500)),
-        modifier = Modifier.size(60.dp)
+        modifier = Modifier.size(80.dp)
     ) {
         Text("B")
     }
@@ -118,7 +120,7 @@ fun ButtonC(text: String = "C") {
     Button(
         onClick = {},
         colors = ButtonDefaults.buttonColors(colorResource(R.color.purple_700)),
-        modifier = Modifier.size(40.dp)
+        modifier = Modifier.size(60.dp)
     ) {
         Text(text)
     }
@@ -172,7 +174,12 @@ fun BoxButtonPreview() {
 
 @Composable
 fun ColumnAlignment() {
-    Row(modifier = Modifier.fillMaxWidth().padding(16.dp), horizontalArrangement = Arrangement.SpaceEvenly) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
         Column(horizontalAlignment = Alignment.Start) {
             Text("Start")
             Spacing()
@@ -224,22 +231,33 @@ fun RowAlignment() {
         ) {
             Text(
                 text = "Top                      ",
-                modifier = Modifier.align(Alignment.CenterVertically)
+//                modifier = Modifier.align(Alignment.CenterVertically)
             )
             ButtonA()
             ButtonB()
             ButtonC()
         }
         Spacing()
-        Row(verticalAlignment = Alignment.CenterVertically,horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier.fillMaxWidth()
+        ) {
             Text("CenterVertically")
             ButtonA()
             ButtonB()
             ButtonC()
         }
         Spacing()
-        Row(verticalAlignment = Alignment.Bottom, horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
-            Text("Bottom                ", modifier = Modifier.align(Alignment.CenterVertically))
+        Row(
+            verticalAlignment = Alignment.Bottom,
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = "Bottom                ",
+//                modifier = Modifier.align(Alignment.CenterVertically)
+            )
             ButtonA()
             ButtonB()
             ButtonC()
@@ -255,7 +273,9 @@ fun RowAlignmentPreview() {
 
 @Composable
 fun BoxAlignment() {
-    Box(modifier = Modifier.padding(16.dp).fillMaxSize()) {
+    Box(modifier = Modifier
+        .padding(16.dp)
+        .fillMaxSize()) {
         ButtonWithText("TopStart", Modifier.align(Alignment.TopStart))
         ButtonWithText("TopCenter", Modifier.align(Alignment.TopCenter))
         ButtonWithText("TopEnd", Modifier.align(Alignment.TopEnd))
@@ -287,7 +307,9 @@ fun ButtonWithText(text: String, modifier: Modifier = Modifier) {
 
 @Composable
 fun RowButtonMaxWidth(arrangement: Arrangement.Horizontal = Arrangement.Start) {
-    Row(horizontalArrangement = arrangement, modifier = Modifier.padding(16.dp).fillMaxWidth()) {
+    Row(horizontalArrangement = arrangement, modifier = Modifier
+        .padding(16.dp)
+        .fillMaxWidth()) {
         ButtonC("")
         Spacing()
         ButtonC("")
@@ -316,7 +338,9 @@ fun ArrangementPreview() {
 
 @Composable
 fun Weight() {
-    Column(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
+    Column(modifier = Modifier
+        .fillMaxWidth()
+        .padding(16.dp)) {
         Row {
             ButtonWithText("1", Modifier.weight(1f))
             ButtonWithText("1", Modifier.weight(1f))
