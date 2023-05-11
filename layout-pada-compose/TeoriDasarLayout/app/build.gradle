@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace 'com.dicoding.mycomposelayout'
     compileSdk 32
 
     defaultConfig {
