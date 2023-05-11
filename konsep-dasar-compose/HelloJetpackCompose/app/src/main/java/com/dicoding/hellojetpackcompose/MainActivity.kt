@@ -9,14 +9,9 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.outlined.ExpandMore
-import androidx.compose.material3.Card
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -102,7 +97,9 @@ fun Greeting(name: String) {
         )
     )
     Card(
-        backgroundColor = MaterialTheme.colors.primary,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+        ),
         shape = MaterialTheme.shapes.medium,
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
@@ -124,7 +121,7 @@ fun Greeting(name: String) {
                 )
                 Text(
                     text = "Welcome to Dicoding!",
-                    style = MaterialTheme.typography.body1.copy(
+                    style = MaterialTheme.typography.bodyLarge.copy(
                         fontStyle = FontStyle.Italic
                     )
                 )
@@ -142,7 +139,7 @@ fun Greeting(name: String) {
 @Preview(showBackground = true)
 @Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
-fun DefaultPreview() {
+fun GreetingPreview() {
     HelloJetpackComposeTheme {
         Greeting("Jetpack Compose")
     }
