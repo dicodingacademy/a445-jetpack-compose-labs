@@ -9,6 +9,8 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.outlined.ExpandMore
@@ -69,19 +71,19 @@ fun HelloJetpackComposeAppPreview() {
 @Composable
 fun GreetingList(names: List<String>) {
     if (names.isNotEmpty()) {
-        Column {
-            for (name in names) {
-                Greeting(name)
-            }
-        }
-//        LazyColumn {
-//            items(names) { name ->
+//        Column {
+//            for (name in names) {
 //                Greeting(name)
 //            }
 //        }
+        LazyColumn {
+            items(names) { name ->
+                Greeting(name)
+            }
+        }
     } else {
         Box(contentAlignment = Alignment.Center) {
-            Text("No people to great :(")
+            Text("No people to greet :(")
         }
     }
 }
@@ -97,10 +99,10 @@ fun Greeting(name: String) {
         )
     )
     Card(
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant,
-        ),
         shape = MaterialTheme.shapes.medium,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+        ),
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
         Row(
