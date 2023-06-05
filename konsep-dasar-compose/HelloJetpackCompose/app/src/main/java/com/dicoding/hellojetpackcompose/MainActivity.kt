@@ -9,10 +9,12 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.outlined.ExpandMore
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,7 +53,7 @@ class MainActivity : ComponentActivity() {
 fun HelloJetpackComposeApp() {
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colors.background
+        color = MaterialTheme.colorScheme.background
     ) {
         GreetingList(sampleName)
     }
@@ -69,19 +71,19 @@ fun HelloJetpackComposeAppPreview() {
 @Composable
 fun GreetingList(names: List<String>) {
     if (names.isNotEmpty()) {
-        Column {
-            for (name in names) {
-                Greeting(name)
-            }
-        }
-//        LazyColumn {
-//            items(names) { name ->
+//        Column {
+//            for (name in names) {
 //                Greeting(name)
 //            }
 //        }
+        LazyColumn {
+            items(names) { name ->
+                Greeting(name)
+            }
+        }
     } else {
         Box(contentAlignment = Alignment.Center) {
-            Text("No people to great :(")
+            Text("No people to greet :(")
         }
     }
 }
@@ -97,8 +99,10 @@ fun Greeting(name: String) {
         )
     )
     Card(
-        backgroundColor = MaterialTheme.colors.primary,
         shape = MaterialTheme.shapes.medium,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+        ),
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
         Row(
@@ -119,7 +123,7 @@ fun Greeting(name: String) {
                 )
                 Text(
                     text = "Welcome to Dicoding!",
-                    style = MaterialTheme.typography.body1.copy(
+                    style = MaterialTheme.typography.bodyLarge.copy(
                         fontStyle = FontStyle.Italic
                     )
                 )
@@ -137,7 +141,7 @@ fun Greeting(name: String) {
 @Preview(showBackground = true)
 @Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
-fun DefaultPreview() {
+fun GreetingPreview() {
     HelloJetpackComposeTheme {
         Greeting("Jetpack Compose")
     }
