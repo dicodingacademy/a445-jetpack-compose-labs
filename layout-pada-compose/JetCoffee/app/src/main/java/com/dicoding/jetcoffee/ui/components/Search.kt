@@ -1,6 +1,7 @@
 package com.dicoding.jetcoffee.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -43,6 +44,7 @@ fun Search(modifier: Modifier = Modifier) {
         modifier = modifier
             .padding(16.dp)
             .fillMaxWidth()
+            .heightIn(min = 48.dp)
     ) {
     }
 }
