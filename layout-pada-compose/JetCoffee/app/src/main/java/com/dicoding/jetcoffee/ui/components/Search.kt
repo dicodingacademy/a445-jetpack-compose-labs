@@ -28,14 +28,15 @@ fun Search(modifier: Modifier = Modifier) {
         onSearch = {},
         active = false,
         onActiveChange = {},
-        placeholder = {
-            Text(stringResource(R.string.placeholder_search))
-        },
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
-                contentDescription = stringResource(R.string.placeholder_search)
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
+        },
+        placeholder = {
+            Text(stringResource(R.string.placeholder_search))
         },
         shape = MaterialTheme.shapes.large,
         colors = SearchBarDefaults.colors(
@@ -51,7 +52,7 @@ fun Search(modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun SearchBarPreview() {
+fun SearchPreview() {
     JetCoffeeTheme {
         Search()
     }
