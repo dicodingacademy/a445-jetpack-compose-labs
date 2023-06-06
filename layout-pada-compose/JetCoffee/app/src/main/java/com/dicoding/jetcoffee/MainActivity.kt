@@ -4,7 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -13,17 +18,25 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.dicoding.jetcoffee.model.*
+import com.dicoding.jetcoffee.model.BottomBarItem
+import com.dicoding.jetcoffee.model.Menu
+import com.dicoding.jetcoffee.model.dummyBestSellerMenu
+import com.dicoding.jetcoffee.model.dummyCategory
+import com.dicoding.jetcoffee.model.dummyMenu
 import com.dicoding.jetcoffee.ui.components.CategoryItem
 import com.dicoding.jetcoffee.ui.components.HomeSection
 import com.dicoding.jetcoffee.ui.components.MenuItem
@@ -116,9 +129,9 @@ fun MenuRow(
 fun BottomBar(
     modifier: Modifier = Modifier
 ) {
-    BottomNavigation(
-        backgroundColor = MaterialTheme.colors.background,
-        contentColor = MaterialTheme.colors.primary,
+    NavigationBar(
+        containerColor = MaterialTheme.colorScheme.background,
+        contentColor = MaterialTheme.colorScheme.primary,
         modifier = modifier
     ) {
         val navigationItems = listOf(
@@ -136,7 +149,7 @@ fun BottomBar(
             ),
         )
         navigationItems.map {
-            BottomNavigationItem(
+            NavigationBarItem(
                 icon = {
                     Icon(
                         imageVector = it.icon,
@@ -147,7 +160,6 @@ fun BottomBar(
                     Text(it.title)
                 },
                 selected = it.title == navigationItems[0].title,
-                unselectedContentColor = LightGray,
                 onClick = {}
             )
         }
