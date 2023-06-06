@@ -40,7 +40,7 @@ import com.dicoding.jetcoffee.model.dummyMenu
 import com.dicoding.jetcoffee.ui.components.CategoryItem
 import com.dicoding.jetcoffee.ui.components.HomeSection
 import com.dicoding.jetcoffee.ui.components.MenuItem
-import com.dicoding.jetcoffee.ui.components.SearchBar
+import com.dicoding.jetcoffee.ui.components.Search
 import com.dicoding.jetcoffee.ui.theme.JetCoffeeTheme
 
 class MainActivity : ComponentActivity() {
@@ -90,7 +90,7 @@ fun Banner(modifier: Modifier = Modifier) {
             contentScale = ContentScale.Crop,
             modifier = Modifier.height(160.dp)
         )
-        SearchBar()
+        Search()
     }
 }
 
