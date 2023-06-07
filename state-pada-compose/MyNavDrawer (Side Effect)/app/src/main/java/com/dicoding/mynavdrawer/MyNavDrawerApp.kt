@@ -1,24 +1,18 @@
 package com.dicoding.mynavdrawer
 
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.layout.LazyLayout
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,62 +20,81 @@ import androidx.compose.ui.unit.dp
 import com.dicoding.mynavdrawer.ui.theme.MyNavDrawerTheme
 import kotlinx.coroutines.launch
 
+data class MenuItem(val title: String, val icon: ImageVector)
+
 @Composable
 fun MyNavDrawerApp() {
-    val scaffoldState = rememberScaffoldState()
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
-    val context = LocalContext.current
+    val items = listOf(
+        MenuItem(
+            title = stringResource(R.string.home),
+            icon = Icons.Default.Home
+        ),
+        MenuItem(
+            title = stringResource(R.string.favourite),
+            icon = Icons.Default.Favorite
+        ),
+        MenuItem(
+            title = stringResource(R.string.profile),
+            icon = Icons.Default.AccountCircle
+        ),
+    )
+    val selectedItem = remember { mutableStateOf(items[0]) }
+    BackPressHandler(enabled = drawerState.isOpen) {
+        scope.launch {
+            drawerState.close()
+        }
+    }
 
     Scaffold(
-        scaffoldState = scaffoldState,
         topBar = {
             MyTopBar(
                 onMenuClick = {
                     scope.launch {
-                        scaffoldState.drawerState.open()
+                        if (drawerState.isClosed) {
+                            drawerState.open()
+                        } else {
+                            drawerState.close()
+                        }
                     }
                 }
             )
         },
-        drawerContent = {
-//            Text(stringResource(R.string.hello_from_nav_drawer))
-            MyDrawerContent(
-                onItemSelected = { title ->
-                    scope.launch {
-                        scaffoldState.drawerState.close()
-                        val snackbarResult = scaffoldState.snackbarHostState.showSnackbar(
-                            message = context.resources.getString(R.string.coming_soon, title),
-                            actionLabel = context.resources.getString(R.string.subscribe_question)
-                        )
-                        if (snackbarResult == SnackbarResult.ActionPerformed) {
-                            Toast.makeText(
-                                context,
-                                context.resources.getString(R.string.subscribed_info),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-                },
-                onBackPress = {
-                    if (scaffoldState.drawerState.isOpen) {
-                        scope.launch {
-                            scaffoldState.drawerState.close()
-                        }
-                    }
-                },
-            )
-        },
-        drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
     ) { paddingValues ->
-        Box(
-            modifier = Modifier.fillMaxSize().padding(paddingValues),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(stringResource(R.string.hello_world))
-        }
+        ModalNavigationDrawer(
+            drawerState = drawerState,
+            drawerContent = {
+                ModalDrawerSheet {
+                    Spacer(Modifier.height(12.dp))
+                    items.forEach { item ->
+                        NavigationDrawerItem(
+                            icon = { Icon(item.icon, contentDescription = null) },
+                            label = { Text(item.title) },
+                            selected = item == selectedItem.value,
+                            onClick = {
+                                scope.launch { drawerState.close() }
+                                selectedItem.value = item
+                            },
+                            modifier = Modifier.padding(horizontal = 12.dp)
+                        )
+                    }
+                }
+            },
+            modifier = Modifier.padding(paddingValues),
+            content = {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Text(text = if (drawerState.isClosed) ">>> Swipe to open >>>" else "<<< Swipe to close <<<")
+                }
+            }
+        )
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyTopBar(onMenuClick: () -> Unit) {
     TopAppBar(
@@ -99,61 +112,6 @@ fun MyTopBar(onMenuClick: () -> Unit) {
             Text(stringResource(R.string.app_name))
         },
     )
-}
-
-data class MenuItem(val title: String, val icon: ImageVector)
-
-@Composable
-fun MyDrawerContent(
-    modifier: Modifier = Modifier,
-    onItemSelected: (title: String) -> Unit,
-    onBackPress: () -> Unit,
-) {
-    val items = listOf(
-        MenuItem(
-            title = stringResource(R.string.home),
-            icon = Icons.Default.Home
-        ),
-        MenuItem(
-            title = stringResource(R.string.favourite),
-            icon = Icons.Default.Favorite
-        ),
-        MenuItem(
-            title = stringResource(R.string.profile),
-            icon = Icons.Default.AccountCircle
-        ),
-    )
-    Column(modifier.fillMaxSize()) {
-        Box(
-            modifier = Modifier
-                .height(190.dp)
-                .fillMaxWidth()
-                .background(MaterialTheme.colors.primary)
-        )
-        for (item in items) {
-            Row(
-                modifier = Modifier
-                    .clickable { onItemSelected(item.title) }
-                    .padding(vertical = 12.dp, horizontal = 16.dp)
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    imageVector = item.icon,
-                    contentDescription = item.title,
-                    tint = Color.DarkGray
-                )
-                Spacer(Modifier.width(32.dp))
-                Text(text = item.title, style = MaterialTheme.typography.subtitle2)
-            }
-        }
-        Divider()
-    }
-//    BackHandler {
-    BackPressHandler {
-        //do something
-        onBackPress()
-    }
 }
 
 @Composable
