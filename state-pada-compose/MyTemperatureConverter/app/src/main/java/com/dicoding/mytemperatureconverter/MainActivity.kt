@@ -7,10 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -26,7 +23,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = MaterialTheme.colorScheme.background
                 ) {
                     Column {
                         StatefulTemperatureInput()
@@ -48,7 +45,7 @@ fun StatefulTemperatureInput(
     Column(modifier.padding(16.dp)) {
         Text(
             text = stringResource(R.string.stateful_converter),
-            style = MaterialTheme.typography.h5
+            style = MaterialTheme.typography.headlineSmall
         )
         OutlinedTextField(
             value = input,
@@ -78,7 +75,7 @@ fun StatelessTemperatureInput(
     Column(modifier.padding(16.dp)) {
         Text(
             text = stringResource(R.string.stateless_converter),
-            style = MaterialTheme.typography.h5
+            style = MaterialTheme.typography.headlineSmall
         )
         OutlinedTextField(
             value = input,
@@ -139,7 +136,7 @@ private fun TwoWayConverterApp(
     Column(modifier.padding(16.dp)) {
         Text(
             text = stringResource(R.string.two_way_converter),
-            style = MaterialTheme.typography.h5
+            style = MaterialTheme.typography.headlineSmall
         )
         GeneralTemperatureInput(
             scale = Scale.CELSIUS,
