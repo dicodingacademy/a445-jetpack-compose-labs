@@ -25,6 +25,10 @@ data class MenuItem(val title: String, val icon: ImageVector)
 fun MyNavDrawerApp() {
     val appState = rememberMyNavDrawerState()
 
+    BackPressHandler(enabled = appState.drawerState.isOpen) {
+        appState.onBackPress()
+    }
+
     val items = listOf(
         MenuItem(
             title = stringResource(R.string.home),
@@ -41,11 +45,8 @@ fun MyNavDrawerApp() {
     )
     val selectedItem = remember { mutableStateOf(items[0]) }
 
-    BackPressHandler(enabled = appState.drawerState.isOpen) {
-        appState.onBackPress()
-    }
-
     Scaffold(
+        snackbarHost = { SnackbarHost(appState.snackbarHostState) },
         topBar = {
             MyTopBar(
                 onMenuClick = appState::onMenuClick
@@ -53,7 +54,9 @@ fun MyNavDrawerApp() {
         },
     ) { paddingValues ->
         ModalNavigationDrawer(
+            modifier = Modifier.padding(paddingValues),
             drawerState = appState.drawerState,
+            gesturesEnabled = appState.drawerState.isOpen,
             drawerContent = {
                 ModalDrawerSheet {
                     Spacer(Modifier.height(12.dp))
@@ -71,7 +74,6 @@ fun MyNavDrawerApp() {
                     }
                 }
             },
-            modifier = Modifier.padding(paddingValues),
             content = {
                 Box(
                     modifier = Modifier.fillMaxSize(),

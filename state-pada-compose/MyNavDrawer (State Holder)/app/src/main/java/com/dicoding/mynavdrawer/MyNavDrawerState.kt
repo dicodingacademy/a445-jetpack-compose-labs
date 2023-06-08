@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.rememberDrawerState
@@ -17,7 +18,7 @@ import kotlinx.coroutines.launch
 class MyNavDrawerState(
     val drawerState: DrawerState,
     private val scope: CoroutineScope,
-    private val snackbarHostState: SnackbarHostState,
+    val snackbarHostState: SnackbarHostState,
     private val context: Context
 ) {
     fun onMenuClick() {
@@ -35,7 +36,9 @@ class MyNavDrawerState(
             drawerState.close()
             val snackbarResult = snackbarHostState.showSnackbar(
                 message = context.resources.getString(R.string.coming_soon, item.title),
-                actionLabel = context.resources.getString(R.string.subscribe_question)
+                actionLabel = context.resources.getString(R.string.subscribe_question),
+                withDismissAction = true,
+                duration = SnackbarDuration.Short
             )
             if (snackbarResult == SnackbarResult.ActionPerformed) {
                 Toast.makeText(
