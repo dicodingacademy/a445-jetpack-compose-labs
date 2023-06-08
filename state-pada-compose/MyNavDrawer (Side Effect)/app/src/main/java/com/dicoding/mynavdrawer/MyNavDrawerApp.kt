@@ -44,7 +44,9 @@ fun MyNavDrawerApp() {
             icon = Icons.Default.AccountCircle
         ),
     )
+
     val selectedItem = remember { mutableStateOf(items[0]) }
+
     BackPressHandler(enabled = drawerState.isOpen) {
         scope.launch {
             drawerState.close()
