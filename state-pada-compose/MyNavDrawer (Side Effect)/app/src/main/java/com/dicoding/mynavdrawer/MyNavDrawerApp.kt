@@ -13,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,6 +27,9 @@ data class MenuItem(val title: String, val icon: ImageVector)
 fun MyNavDrawerApp() {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() }
+    val context = LocalContext.current
+
     val items = listOf(
         MenuItem(
             title = stringResource(R.string.home),
@@ -73,7 +77,13 @@ fun MyNavDrawerApp() {
                             label = { Text(item.title) },
                             selected = item == selectedItem.value,
                             onClick = {
-                                scope.launch { drawerState.close() }
+                                scope.launch {
+                                    drawerState.close()
+                                    snackbarHostState.showSnackbar(
+                                        message = context.resources.getString(R.string.coming_soon, item.title),
+                                        actionLabel = context.resources.getString(R.string.subscribe_question)
+                                    )
+                                }
                                 selectedItem.value = item
                             },
                             modifier = Modifier.padding(horizontal = 12.dp)
