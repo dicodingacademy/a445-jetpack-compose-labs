@@ -2,31 +2,39 @@ package com.dicoding.mynavdrawer
 
 import android.content.Context
 import android.widget.Toast
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.SnackbarResult
-import androidx.compose.material.rememberScaffoldState
-import androidx.compose.runtime.*
+import androidx.compose.material3.DrawerState
+import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
+import androidx.compose.material3.rememberDrawerState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class MyNavDrawerState(
-    val scaffoldState: ScaffoldState,
+    val drawerState: DrawerState,
     private val scope: CoroutineScope,
+    private val snackbarHostState: SnackbarHostState,
     private val context: Context
 ) {
     fun onMenuClick() {
         scope.launch {
-            scaffoldState.drawerState.open()
+            if (drawerState.isClosed) {
+                drawerState.open()
+            } else {
+                drawerState.close()
+            }
         }
     }
 
-    fun onItemSelected(title: String) {
+    fun onItemSelected(item: MenuItem) {
         scope.launch {
-            scaffoldState.drawerState.close()
-            val snackbarResult = scaffoldState.snackbarHostState.showSnackbar(
-                message = context.resources.getString(R.string.coming_soon, title),
+            drawerState.close()
+            val snackbarResult = snackbarHostState.showSnackbar(
+                message = context.resources.getString(R.string.coming_soon, item.title),
                 actionLabel = context.resources.getString(R.string.subscribe_question)
             )
             if (snackbarResult == SnackbarResult.ActionPerformed) {
@@ -40,9 +48,9 @@ class MyNavDrawerState(
     }
 
     fun onBackPress() {
-        if (scaffoldState.drawerState.isOpen) {
+        if (drawerState.isOpen) {
             scope.launch {
-                scaffoldState.drawerState.close()
+                drawerState.close()
             }
         }
     }
@@ -50,10 +58,11 @@ class MyNavDrawerState(
 
 @Composable
 fun rememberMyNavDrawerState(
-    scaffoldState: ScaffoldState = rememberScaffoldState(),
+    drawerState: DrawerState = rememberDrawerState(DrawerValue.Closed),
     coroutinesScope: CoroutineScope = rememberCoroutineScope(),
-    context: Context = LocalContext.current
+    snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
+    context: Context = LocalContext.current,
 ): MyNavDrawerState =
-    remember(scaffoldState, coroutinesScope, context) {
-        MyNavDrawerState(scaffoldState, coroutinesScope, context)
+    remember(drawerState, coroutinesScope, snackbarHostState, context) {
+        MyNavDrawerState(drawerState, coroutinesScope, snackbarHostState, context)
     }
