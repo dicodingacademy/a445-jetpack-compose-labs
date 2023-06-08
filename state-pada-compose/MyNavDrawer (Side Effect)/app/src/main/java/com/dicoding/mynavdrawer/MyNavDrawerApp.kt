@@ -1,6 +1,8 @@
 package com.dicoding.mynavdrawer
 
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -30,6 +32,13 @@ fun MyNavDrawerApp() {
     val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
 
+//    BackHandler(enabled = drawerState.isOpen){
+    BackPressHandler(enabled = drawerState.isOpen) {
+        scope.launch {
+            drawerState.close()
+        }
+    }
+
     val items = listOf(
         MenuItem(
             title = stringResource(R.string.home),
@@ -46,12 +55,6 @@ fun MyNavDrawerApp() {
     )
 
     val selectedItem = remember { mutableStateOf(items[0]) }
-
-    BackPressHandler(enabled = drawerState.isOpen) {
-        scope.launch {
-            drawerState.close()
-        }
-    }
 
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
@@ -84,7 +87,7 @@ fun MyNavDrawerApp() {
                             onClick = {
                                 scope.launch {
                                     drawerState.close()
-                                    snackbarHostState.showSnackbar(
+                                    val snackbarResult = snackbarHostState.showSnackbar(
                                         message = context.resources.getString(
                                             R.string.coming_soon,
                                             item.title
@@ -93,6 +96,13 @@ fun MyNavDrawerApp() {
                                         withDismissAction = true,
                                         duration = SnackbarDuration.Short
                                     )
+                                    if (snackbarResult == SnackbarResult.ActionPerformed) {
+                                        Toast.makeText(
+                                            context,
+                                            context.resources.getString(R.string.subscribed_info),
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
                                 }
                                 selectedItem.value = item
                             },
