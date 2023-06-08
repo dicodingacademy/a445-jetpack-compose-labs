@@ -54,6 +54,7 @@ fun MyNavDrawerApp() {
     }
 
     Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
             MyTopBar(
                 onMenuClick = {
@@ -69,7 +70,9 @@ fun MyNavDrawerApp() {
         },
     ) { paddingValues ->
         ModalNavigationDrawer(
+            modifier = Modifier.padding(paddingValues),
             drawerState = drawerState,
+            gesturesEnabled = drawerState.isOpen,
             drawerContent = {
                 ModalDrawerSheet {
                     Spacer(Modifier.height(12.dp))
@@ -82,8 +85,13 @@ fun MyNavDrawerApp() {
                                 scope.launch {
                                     drawerState.close()
                                     snackbarHostState.showSnackbar(
-                                        message = context.resources.getString(R.string.coming_soon, item.title),
-                                        actionLabel = context.resources.getString(R.string.subscribe_question)
+                                        message = context.resources.getString(
+                                            R.string.coming_soon,
+                                            item.title
+                                        ),
+                                        actionLabel = context.resources.getString(R.string.subscribe_question),
+                                        withDismissAction = true,
+                                        duration = SnackbarDuration.Short
                                     )
                                 }
                                 selectedItem.value = item
@@ -93,13 +101,18 @@ fun MyNavDrawerApp() {
                     }
                 }
             },
-            modifier = Modifier.padding(paddingValues),
             content = {
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center,
                 ) {
-                    Text(text = if (drawerState.isClosed) ">>> Swipe to open >>>" else "<<< Swipe to close <<<")
+                    Text(
+                        if (drawerState.isClosed) {
+                            stringResource(R.string.swipe_to_open)
+                        } else {
+                            stringResource(R.string.swipe_to_close)
+                        }
+                    )
                 }
             }
         )

@@ -9,4 +9,6 @@
     <string name="coming_soon">%s Menu is Coming Soon!</string>
     <string name="subscribe_question">Subscribe?</string>
     <string name="subscribed_info">Subscribed. You will informed when the feature is ready</string>
+    <string name="swipe_to_open"><![CDATA[>>> Swipe to open >>>]]></string>
+    <string name="swipe_to_close"><![CDATA[<<< Swipe to close <<<]]></string>
 </resources>
