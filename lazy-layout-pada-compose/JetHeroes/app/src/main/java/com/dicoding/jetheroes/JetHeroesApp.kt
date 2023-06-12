@@ -127,9 +127,8 @@ fun ScrollToTopButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    FloatingActionButton(
+    FilledIconButton(
         onClick = onClick,
-        shape = CircleShape,
         modifier = modifier
     ) {
         Icon(
@@ -184,9 +183,6 @@ fun SearchBar(
             Text(stringResource(R.string.search_hero))
         },
         shape = MaterialTheme.shapes.large,
-        colors = SearchBarDefaults.colors(
-            containerColor = MaterialTheme.colorScheme.background
-        ),
         modifier = modifier
             .padding(16.dp)
             .fillMaxWidth()
