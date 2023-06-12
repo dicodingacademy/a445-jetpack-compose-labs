@@ -11,7 +11,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Search
@@ -56,7 +56,7 @@ fun JetHeroesApp(
                 SearchBar(
                     query = query,
                     onQueryChange = viewModel::search,
-                    modifier = Modifier.background(MaterialTheme.colors.primary)
+                    modifier = Modifier.background(MaterialTheme.colorScheme.primary)
                 )
             }
             groupedHeroes.forEach { (initial, heroes) ->
@@ -135,8 +135,8 @@ fun ScrollToTopButton(
             .clip(shape = CircleShape)
             .size(56.dp),
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = Color.White,
-            contentColor = MaterialTheme.colors.primary
+            containerColor = Color.White,
+            contentColor = MaterialTheme.colorScheme.primary
         )
     ) {
         Icon(
@@ -152,7 +152,7 @@ fun CharacterHeader(
     modifier: Modifier = Modifier
 ) {
     Surface(
-        color = MaterialTheme.colors.primary,
+        color = MaterialTheme.colorScheme.primary,
         modifier = modifier
     ) {
         Text(
@@ -182,8 +182,7 @@ fun SearchBar(
                 contentDescription = null
             )
         },
-        colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = MaterialTheme.colors.surface,
+        colors = TextFieldDefaults.colors(
             disabledIndicatorColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
