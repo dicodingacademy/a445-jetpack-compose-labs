@@ -32,6 +32,12 @@ fun CartScreen(
     ),
     onOrderButtonClicked: (String) -> Unit,
 ) {
+//    Box(
+//        modifier = Modifier.fillMaxSize(),
+//        contentAlignment = Alignment.Center,
+//    ) {
+//        Text(stringResource(R.string.menu_cart))
+//    }
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
             is UiState.Loading -> {

@@ -146,6 +146,7 @@ private fun BottomBar(
                     )
                 },
                 label = { Text(item.title) },
+//                selected = false,
                 selected = currentRoute == item.screen.route,
                 onClick = {
                     navController.navigate(item.screen.route) {
