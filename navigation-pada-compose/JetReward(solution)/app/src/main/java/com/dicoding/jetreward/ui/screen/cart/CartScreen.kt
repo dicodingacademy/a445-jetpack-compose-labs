@@ -80,17 +80,10 @@ fun CartContent(
                 )
             }
         )
-        OrderButton(
-            text = stringResource(R.string.total_order, state.totalRequiredPoint),
-            enabled = state.orderReward.isNotEmpty(),
-            onClick = {
-                onOrderButtonClicked(shareMessage)
-            },
-            modifier = Modifier.padding(16.dp)
-        )
         LazyColumn(
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.weight(weight = 1f)
         ) {
             items(state.orderReward, key = { it.reward.id }) { item ->
                 CartItem(
@@ -104,5 +97,13 @@ fun CartContent(
                 Divider()
             }
         }
+        OrderButton(
+            text = stringResource(R.string.total_order, state.totalRequiredPoint),
+            enabled = state.orderReward.isNotEmpty(),
+            onClick = {
+                onOrderButtonClicked(shareMessage)
+            },
+            modifier = Modifier.padding(16.dp)
+        )
     }
 }
