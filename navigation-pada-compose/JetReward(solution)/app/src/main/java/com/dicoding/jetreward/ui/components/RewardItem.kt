@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dicoding.jetreward.R
 import com.dicoding.jetreward.ui.theme.JetRewardTheme
+import com.dicoding.jetreward.ui.theme.Shapes
 
 @Composable
 fun RewardItem(
@@ -34,7 +35,7 @@ fun RewardItem(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(170.dp)
-                .clip(MaterialTheme.shapes.medium)
+                .clip(Shapes.small)
         )
         Text(
             text = title,
