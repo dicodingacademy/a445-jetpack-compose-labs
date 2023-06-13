@@ -35,7 +35,7 @@ fun RewardItem(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(170.dp)
-                .clip(Shapes.small)
+                .clip(Shapes.medium)
         )
         Text(
             text = title,

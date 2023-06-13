@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dicoding.jetreward.R
 import com.dicoding.jetreward.ui.theme.JetRewardTheme
+import com.dicoding.jetreward.ui.theme.Shapes
 
 @Composable
 fun CartItem(
@@ -40,7 +41,7 @@ fun CartItem(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(90.dp)
-                .clip(MaterialTheme.shapes.small)
+                .clip(Shapes.small)
         )
         Column(
             modifier = Modifier
