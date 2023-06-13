@@ -3,7 +3,7 @@ package com.dicoding.jetreward
 import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
@@ -115,8 +115,8 @@ private fun BottomBar(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
-    BottomNavigation(
-        modifier = modifier
+    NavigationBar(
+        modifier = modifier,
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
@@ -137,28 +137,26 @@ private fun BottomBar(
                 screen = Screen.Profile
             ),
         )
-        BottomNavigation {
-            navigationItems.map { item ->
-                BottomNavigationItem(
-                    icon = {
-                        Icon(
-                            imageVector = item.icon,
-                            contentDescription = item.title
-                        )
-                    },
-                    label = { Text(item.title) },
-                    selected = currentRoute == item.screen.route,
-                    onClick = {
-                        navController.navigate(item.screen.route) {
-                            popUpTo(navController.graph.findStartDestination().id) {
-                                saveState = true
-                            }
-                            restoreState = true
-                            launchSingleTop = true
+        navigationItems.map { item ->
+            NavigationBarItem(
+                icon = {
+                    Icon(
+                        imageVector = item.icon,
+                        contentDescription = item.title
+                    )
+                },
+                label = { Text(item.title) },
+                selected = currentRoute == item.screen.route,
+                onClick = {
+                    navController.navigate(item.screen.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
                         }
+                        restoreState = true
+                        launchSingleTop = true
                     }
-                )
-            }
+                }
+            )
         }
     }
 }
