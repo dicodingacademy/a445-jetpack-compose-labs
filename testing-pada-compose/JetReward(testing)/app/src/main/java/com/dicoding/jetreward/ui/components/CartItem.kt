@@ -1,9 +1,13 @@
 package com.dicoding.jetreward.ui.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -49,7 +53,7 @@ fun CartItem(
                 text = title,
                 maxLines = 3,
                 overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.subtitle1.copy(
+                style = MaterialTheme.typography.titleMedium.copy(
                     fontWeight = FontWeight.ExtraBold
                 )
             )
@@ -58,8 +62,8 @@ fun CartItem(
                     R.string.required_point,
                     totalPoint
                 ),
-                color = MaterialTheme.colors.secondary,
-                style = MaterialTheme.typography.subtitle2,
+                color = MaterialTheme.colorScheme.secondary,
+                style = MaterialTheme.typography.titleSmall,
             )
         }
         ProductCounter(

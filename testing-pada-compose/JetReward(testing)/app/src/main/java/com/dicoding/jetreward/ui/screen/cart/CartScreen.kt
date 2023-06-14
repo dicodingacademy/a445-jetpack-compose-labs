@@ -3,10 +3,10 @@ package com.dicoding.jetreward.ui.screen.cart
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -32,6 +32,12 @@ fun CartScreen(
     ),
     onOrderButtonClicked: (String) -> Unit,
 ) {
+//    Box(
+//        modifier = Modifier.fillMaxSize(),
+//        contentAlignment = Alignment.Center,
+//    ) {
+//        Text(stringResource(R.string.menu_cart))
+//    }
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
             is UiState.Loading -> {
@@ -51,6 +57,7 @@ fun CartScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CartContent(
     state: CartState,
@@ -66,26 +73,23 @@ fun CartContent(
     Column(
         modifier = modifier.fillMaxSize()
     ) {
-        TopAppBar(backgroundColor = MaterialTheme.colors.surface) {
-            Text(
-                text = stringResource(R.string.menu_cart),
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
-                fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
-                textAlign = TextAlign.Center
-            )
-        }
-        OrderButton(
-            text = stringResource(R.string.total_order, state.totalRequiredPoint),
-            enabled = state.orderReward.isNotEmpty(),
-            onClick = {
-                onOrderButtonClicked(shareMessage)
-            },
-            modifier = Modifier.padding(16.dp)
+        CenterAlignedTopAppBar(
+            title = {
+                Text(
+                    text = stringResource(R.string.menu_cart),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 12.dp),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    textAlign = TextAlign.Center
+                )
+            }
         )
         LazyColumn(
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.weight(weight = 1f)
         ) {
             items(state.orderReward, key = { it.reward.id }) { item ->
                 CartItem(
@@ -99,5 +103,13 @@ fun CartContent(
                 Divider()
             }
         }
+        OrderButton(
+            text = stringResource(R.string.total_order, state.totalRequiredPoint),
+            enabled = state.orderReward.isNotEmpty(),
+            onClick = {
+                onOrderButtonClicked(shareMessage)
+            },
+            modifier = Modifier.padding(16.dp)
+        )
     }
 }

@@ -26,6 +26,12 @@ fun HomeScreen(
     ),
     navigateToDetail: (Long) -> Unit,
 ) {
+//    Box(
+//        modifier = modifier.fillMaxSize(),
+//        contentAlignment = Alignment.Center,
+//    ) {
+//        Text(stringResource(R.string.menu_home))
+//    }
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
             is UiState.Loading -> {

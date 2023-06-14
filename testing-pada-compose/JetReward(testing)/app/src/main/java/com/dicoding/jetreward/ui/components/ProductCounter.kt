@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,9 +39,9 @@ fun ProductCounter(
     ) {
         Surface(
             shape = RoundedCornerShape(size = 5.dp),
-            border = BorderStroke(1.dp, MaterialTheme.colors.primary),
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
             color = Color.Transparent,
-            contentColor = MaterialTheme.colors.primary,
+            contentColor = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(30.dp)
         ) {
             Text(
@@ -66,9 +66,9 @@ fun ProductCounter(
         )
         Surface(
             shape = RoundedCornerShape(size = 5.dp),
-            border = BorderStroke(1.dp, MaterialTheme.colors.primary),
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
             color = Color.Transparent,
-            contentColor = MaterialTheme.colors.primary,
+            contentColor = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(30.dp)
         ) {
             Text(
