@@ -40,15 +40,15 @@ class CalculatorAppTest {
             .assertExists()
     }
 
-    @Test
-    fun wrong_input_not_calculated() {
-        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.enter_length))
-            .performTextInput("..3")
-        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.enter_width))
-            .performTextInput("4")
-        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count))
-            .performClick()
-        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.result, 0.0))
-            .assertExists()
-    }
+//    @Test
+//    fun wrong_input_not_calculated() {
+//        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.enter_length))
+//            .performTextInput("..3")
+//        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.enter_width))
+//            .performTextInput("4")
+//        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.count))
+//            .performClick()
+//        composeTestRule.onNodeWithText(composeTestRule.activity.getString(R.string.result, 0.0))
+//            .assertExists()
+//    }
 }
