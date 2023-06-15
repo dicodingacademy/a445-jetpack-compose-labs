@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -136,6 +136,6 @@ fun NewsItem(
 @Composable
 fun NewsItemPreview() {
     MaterialTheme {
-        NewsItem("", "New News", "2022-02-22", {})
+        NewsItem("", "New News", "2022-02-22") {}
     }
 }
