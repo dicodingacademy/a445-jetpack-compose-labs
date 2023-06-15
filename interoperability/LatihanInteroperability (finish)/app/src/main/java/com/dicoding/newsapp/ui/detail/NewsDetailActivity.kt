@@ -1,5 +1,6 @@
 package com.dicoding.newsapp.ui.detail
 
+import android.nfc.NfcAdapter.EXTRA_DATA
 import android.os.Bundle
 import android.view.ViewGroup
 import android.webkit.WebView
@@ -20,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.content.IntentCompat.getParcelableExtra
 import com.dicoding.newsapp.R
 import com.dicoding.newsapp.data.local.entity.NewsEntity
 import com.dicoding.newsapp.ui.ViewModelFactory
@@ -35,7 +37,7 @@ class NewsDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        newsDetail = intent.getParcelableExtra<NewsEntity>(NEWS_DATA) as NewsEntity
+        newsDetail = getParcelableExtra(intent, NEWS_DATA, NewsEntity::class.java) as NewsEntity
 
         setContent {
             MaterialTheme {

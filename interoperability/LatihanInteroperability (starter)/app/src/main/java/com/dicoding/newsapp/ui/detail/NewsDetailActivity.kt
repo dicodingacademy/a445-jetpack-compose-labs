@@ -7,6 +7,7 @@ import android.webkit.WebViewClient
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.IntentCompat
 import com.dicoding.newsapp.R
 import com.dicoding.newsapp.data.local.entity.NewsEntity
 import com.dicoding.newsapp.databinding.ActivityNewsDetailBinding
@@ -26,7 +27,7 @@ class NewsDetailActivity : AppCompatActivity() {
         binding = ActivityNewsDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        newsDetail = intent.getParcelableExtra<NewsEntity>(NEWS_DATA) as NewsEntity
+        newsDetail = IntentCompat.getParcelableExtra(intent, NEWS_DATA, NewsEntity::class.java) as NewsEntity
 
         binding.topAppBar.title = newsDetail.title
 
