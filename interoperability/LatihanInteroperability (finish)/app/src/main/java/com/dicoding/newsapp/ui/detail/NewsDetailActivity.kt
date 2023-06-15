@@ -1,6 +1,5 @@
 package com.dicoding.newsapp.ui.detail
 
-import android.nfc.NfcAdapter.EXTRA_DATA
 import android.os.Bundle
 import android.view.ViewGroup
 import android.webkit.WebView
