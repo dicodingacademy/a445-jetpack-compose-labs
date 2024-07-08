@@ -27,7 +27,7 @@ data class MenuItem(val title: String, val icon: ImageVector)
 
 @Composable
 fun MyNavDrawerApp() {
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current

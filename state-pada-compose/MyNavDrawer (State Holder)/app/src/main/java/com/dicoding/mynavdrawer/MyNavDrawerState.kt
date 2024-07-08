@@ -61,7 +61,7 @@ class MyNavDrawerState(
 
 @Composable
 fun rememberMyNavDrawerState(
-    drawerState: DrawerState = rememberDrawerState(DrawerValue.Closed),
+    drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed),
     coroutinesScope: CoroutineScope = rememberCoroutineScope(),
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
     context: Context = LocalContext.current,
