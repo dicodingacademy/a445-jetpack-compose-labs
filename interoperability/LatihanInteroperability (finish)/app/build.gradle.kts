@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "com.dicoding.newsapp"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
