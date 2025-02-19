@@ -1,8 +1,6 @@
 package com.dicoding.newsapp.ui.detail
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.webkit.WebViewClient
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity

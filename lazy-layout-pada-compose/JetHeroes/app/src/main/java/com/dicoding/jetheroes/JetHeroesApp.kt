@@ -67,7 +67,7 @@ fun JetHeroesApp(
                         photoUrl = hero.photoUrl,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .animateItemPlacement(tween(durationMillis = 100))
+                            .animateItem(placementSpec = tween(durationMillis = 100))
                     )
                 }
             }
@@ -167,26 +167,32 @@ fun SearchBar(
     modifier: Modifier = Modifier
 ) {
     SearchBar(
-        query = query,
-        onQueryChange = onQueryChange,
-        onSearch = {},
-        active = false,
-        onActiveChange = {},
-        leadingIcon = {
-            Icon(
-                imageVector = Icons.Default.Search,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
+        inputField = {
+            SearchBarDefaults.InputField(
+                query = query,
+                onQueryChange = onQueryChange,
+                onSearch = {},
+                expanded = false,
+                onExpandedChange = {},
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                },
+                placeholder = {
+                    Text(stringResource(R.string.search_hero))
+                },
             )
         },
-        placeholder = {
-            Text(stringResource(R.string.search_hero))
-        },
+        expanded = false,
+        onExpandedChange = {},
         shape = MaterialTheme.shapes.large,
         modifier = modifier
             .padding(16.dp)
             .fillMaxWidth()
-            .heightIn(min = 48.dp)
+            .heightIn(min = 48.dp),
     ) {
     }
 }

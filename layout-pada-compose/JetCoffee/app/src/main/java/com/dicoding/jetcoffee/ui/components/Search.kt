@@ -23,21 +23,27 @@ import com.dicoding.jetcoffee.ui.theme.JetCoffeeTheme
 @Composable
 fun Search(modifier: Modifier = Modifier) {
     SearchBar(
-        query = "",
-        onQueryChange = {},
-        onSearch = {},
-        active = false,
-        onActiveChange = {},
-        leadingIcon = {
-            Icon(
-                imageVector = Icons.Default.Search,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
+        inputField = {
+            SearchBarDefaults.InputField(
+                query = "",
+                onQueryChange = {},
+                onSearch = {},
+                expanded = false,
+                onExpandedChange = {},
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                },
+                placeholder = {
+                    Text(stringResource(R.string.placeholder_search))
+                },
             )
         },
-        placeholder = {
-            Text(stringResource(R.string.placeholder_search))
-        },
+        expanded = false,
+        onExpandedChange = {},
         shape = MaterialTheme.shapes.large,
         colors = SearchBarDefaults.colors(
             containerColor = MaterialTheme.colorScheme.background
@@ -46,8 +52,7 @@ fun Search(modifier: Modifier = Modifier) {
             .padding(16.dp)
             .fillMaxWidth()
             .heightIn(min = 48.dp)
-    ) {
-    }
+    ) {}
 }
 
 @Preview(showBackground = true)
