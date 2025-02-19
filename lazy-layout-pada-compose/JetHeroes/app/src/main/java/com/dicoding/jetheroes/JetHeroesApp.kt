@@ -67,7 +67,7 @@ fun JetHeroesApp(
                         photoUrl = hero.photoUrl,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .animateItemPlacement(tween(durationMillis = 100))
+                            .animateItem(placementSpec = tween(durationMillis = 100))
                     )
                 }
             }
