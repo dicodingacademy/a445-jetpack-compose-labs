@@ -4,6 +4,7 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
@@ -41,6 +42,7 @@ val sampleName = listOf(
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
             HelloJetpackComposeTheme {
                 HelloJetpackComposeApp()
@@ -51,12 +53,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun HelloJetpackComposeApp() {
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
-    ) {
-        GreetingList(sampleName)
-    }
+    GreetingList(sampleName)
 }
 
 @Preview(showBackground = true, device = Devices.PIXEL_4)
