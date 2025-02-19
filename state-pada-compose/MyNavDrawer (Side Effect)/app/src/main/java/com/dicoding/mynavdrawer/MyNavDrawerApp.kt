@@ -2,7 +2,6 @@ package com.dicoding.mynavdrawer
 
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.compose.BackHandler
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
