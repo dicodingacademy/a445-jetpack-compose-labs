@@ -1,0 +1,25 @@
+name: SenpAI Code Review
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  issue_comment:
+    types: [created]
+
+jobs:
+  code-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Run SenpAI Review
+        uses: dicodingacademy/senpai-action@v0.0.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          EXCLUDE_FILES: '*.json, *.lock'
+          TRIGGER_COMMAND: '/review'
+          LANGUAGE_REVIEW: 'indonesian'
+          TONE_RESPONSE: 'professional'
