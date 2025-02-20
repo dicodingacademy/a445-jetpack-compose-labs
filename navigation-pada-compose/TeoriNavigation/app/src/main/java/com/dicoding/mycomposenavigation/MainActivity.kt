@@ -22,12 +22,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyComposeNavigationTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    MyApp()
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    MyApp(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -35,11 +31,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MyApp() {
+fun MyApp(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = "first"
+        startDestination = "first",
+        modifier = modifier
     ) {
         composable(route = "first") {
             FirstScreen { messageContent ->
