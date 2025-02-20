@@ -78,8 +78,8 @@ fun DetailContent(
     modifier: Modifier = Modifier,
 ) {
 
-    var totalPoint by rememberSaveable { mutableStateOf(0) }
-    var orderCount by rememberSaveable { mutableStateOf(count) }
+    var totalPoint by rememberSaveable { mutableIntStateOf(0) }
+    var orderCount by rememberSaveable { mutableIntStateOf(count) }
 
     Column(modifier = modifier) {
         Column(
