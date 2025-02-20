@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -100,7 +101,7 @@ fun CartContent(
                     count = item.count,
                     onProductCountChanged = onProductCountChanged,
                 )
-                Divider()
+                HorizontalDivider()
             }
         }
         OrderButton(
