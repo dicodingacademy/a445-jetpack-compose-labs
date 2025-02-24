@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.dicoding.emptycomposeactivity"
+    namespace = "com.dicoding.jetreward"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.dicoding.emptycomposeactivity"
+        applicationId = "com.dicoding.jetreward"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
