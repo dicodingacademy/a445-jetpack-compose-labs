@@ -1,5 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.News" parent="Theme.Material3.DayNight.NoActionBar">
 
-    <style name="Theme.News" parent="android:Theme.Material.Light.NoActionBar" />
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.News" parent="Base.Theme.News"/>
+
+    <style name="MyThemeOverlay_Toolbar" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <!-- color used by navigation icon and overflow icon -->
+        <item name="colorOnPrimary">?attr/colorPrimary</item>
+    </style>
 </resources>
