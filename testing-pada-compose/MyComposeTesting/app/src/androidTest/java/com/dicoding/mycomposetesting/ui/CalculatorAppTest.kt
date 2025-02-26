@@ -1,10 +1,13 @@
 package com.dicoding.mycomposetesting.ui
 
 import androidx.activity.ComponentActivity
-import androidx.compose.ui.test.*
-import androidx.compose.ui.test.junit4.ComposeTestRule
+import androidx.compose.ui.test.assertHasNoClickAction
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import com.dicoding.mycomposetesting.MainActivity
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
+import androidx.compose.ui.test.printToLog
 import com.dicoding.mycomposetesting.R
 import com.dicoding.mycomposetesting.ui.theme.MyComposeTestingTheme
 import org.junit.Before
